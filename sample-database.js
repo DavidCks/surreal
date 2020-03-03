@@ -1,7 +1,7 @@
 {
     "config": {
         "dbVersion": "2.7.0",
-        "siteTitle": "Parallax theme",
+        "siteTitle": "Surreal theme",
         "theme": "dev",
         "defaultPage": "home",
         "login": "login",
