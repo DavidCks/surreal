@@ -1,437 +1,203 @@
-/*
- *  WonderCMS 3.0.0 Parallax Theme
- *  by Stephan Stanisic
- *
- *  This is my first theme I've build, ever. Most times I
- *  just grap a theme from my friends at pixelarity.com
- *  They make awesome themes, and you get them all for
- *  a small monthly substription.
- *  They also have a Creative Commons Licenced version of
- *  some of their work available at html5up.net. Just wanted
- *  to give these guys some credit.
- *
- *  Anyhow, don't be too picky here. Most of this has been put
- *  together without planning.
- */
-
-
-/* Some resets */
-
-    *:focus {
-        outline: none;
-    }
-
-    body {
-        font-family: "Lato", sans-serif;
-    }
-
-    .row {
-        /* Stupid bootstrap */
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .navbar-default {
-        background: transparent;
-        border: 0;
-        margin: 0;
-        position: absolute;
-    }
-
-    img {
-        max-width: 100%;
-    }
-
-
-
-/* Navigation */
-
-    nav.navbar-default , #adminPanel {
-        position: absolute;
-
-        height: auto;
-        padding: 1em 2em;
-
-        transition: margin 1s;
-    }
-
-    nav.navbar-default  {
-        width: 100%;
-        z-index: 2;
-    }
-
-    /* Quick hack for higher priority */
-    body #adminPanel {
-        right: 0;
-
-        width: 15em;
-        z-index: 1050;
-
-        background: transparent;
-    }
-
-    .navbar-default .navbar-nav > .active > a,
-    .navbar-default .navbar-nav > .active > a:focus,
-    .navbar-default .navbar-nav > .active > a:hover {
-        background: transparent;
-        color: #fff;
-        border-bottom: 1px solid #fff;
-    }
-
-    /* Make the nav panel shorter when logged in  */
-    /* This to make space for the settings button */
-    #adminPanel + nav {
-        width: calc(100% - 15em);
-    }
-    #adminPanel + nav.sticky {
-        width: 100%;
-    }
-
-    nav.sticky {
-        position: fixed;
-
-        width: 100%;
-        border-radius: 0;
-
-        animation: animatetop 0.4s;
-
-        background: #37474F;
-    }
-
-    nav.background {
-        background: #37474F;
-        border-radius: 0;
-        position: relative;
-    }
-
-
-    nav.no-animation {
-        animation: none;
-    }
-
-    nav.background:after {
-        content: "";
-
-        position: absolute;
-        top: 0;
-        right: -15em;
-
-        width: 15em;
-        height: 5.7em;
-
-        background: #37474F;
-    }
-
-    nav:not(.sticky) .container {
-        width: 100%;
-    }
-
-    nav:not(.sticky) .nav > li > a,
-    nav:not(.sticky) .navbar-brand {
-        text-shadow: 0 0 1em #000;
-    }
-
-    nav.navbar-default .navbar-brand {
-        color: #fff;
-
-        font-size: 1.5em;
-    }
-
-    .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
-        color: #fff;
-    }
-
-    .navbar-default .nav > li > a {
-        color: #fff;
-        border-bottom: 1px solid transparent;
-    }
-
-    .navbar-default .nav > li > a:focus,
-    .navbar-default .nav > li > a:hover {
-        color: #fff;
-        border-bottom: 1px solid #fff;
-
-        /* Stupid bootstrap */
-        background: transparent;
-    }
-
-    .navbar-default .navbar-toggle {
-        border-color: transparent;
-        position: fixed;
-        right: 1em;
-        z-index: 999999999;
-        filter: drop-shadow(0 0 2px #000);
-    }
-
-    .navbar-default .navbar-toggle .icon-bar {
-        background-color: #fff;
-    }
-
-    .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-        background-color: rgba(0,0,0,0);
-    }
-
-    .navbar-collapse.collapse.in,
-    .navbar-collapse.collapsing {
-        opacity: 1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: rgba(0,0,0,0.9);
-        text-align: center;
-        display: flex;
-        border: 0;
-    }
-
-    .navbar-collapse.collapse.in ul.nav.navbar-nav.navbar-right,
-    .navbar-collapse.collapsing ul.nav.navbar-nav.navbar-right {
-        margin: auto;
-        font-size: 1.2em;
-    }
-
-    .navbar-collapse.collapse.in .nav>li,
-    .navbar-collapse.collapsing .nav>li {
-        margin: 2em;
-        min-width: 30vw;
-    }
-
-    .navbar-collapse.collapse.in .nav>li.active a,
-    .navbar-collapse.collapsing .nav>li.active a {
-        border-bottom: 0;
-    }
-
-    .navbar-collapse.collapse.in ul.nav.navbar-nav.navbar-right:before,
-    .navbar-collapse.collapsing ul.nav.navbar-nav.navbar-right:before {
-        content: "Menu";
-        display: block;
-        font-size: 1.2em;
-        border-bottom: 1px solid #fff;
-        padding-bottom: 1em;
-        color: #fff;
-    }
-
-    div#bs-example-navbar-collapse-1 {
-        transition: opacity 0.5s, height 0.5s;
-        opacity: 1;
-    }
-
-    div#bs-example-navbar-collapse-1.navbar-collapse.collapsing {
-        opacity: 0;
-        height: 0 !important;
-    }
-
-    button.navbar-toggle {
-        transition: 1s;
-    }
-    button.navbar-toggle .icon-bar {
-        transition: 0.5s;
-    }
-
-    button.navbar-toggle:not(.collapsed) .icon-bar:nth-child(1) {
-        transform: rotate(-45deg);
-        display: block;
-        position: relative;
-    }
-
-    .navbar-toggle:not(.collapsed) > span.icon-bar:nth-child(2) {
-        transform: rotate(45deg) translateX(25%) translateY(200%);
-    }
-
-    .navbar-toggle:not(.collapsed) > span.icon-bar:nth-child(4) {
-        transform: rotate(-45deg) translateX(20%) translateY(-150%);
-    }
-
-    .navbar-toggle:not(.collapsed) > span.icon-bar:nth-child(3) {
-        opacity: 0;
-    }
-
-    #adminPanel > .padding20 {
-        padding: 15px;
-        position: relative;
-        z-index: 1;
-    }
-
-    .modal-open #adminPanel > .padding20 {
-        opacity: 0.5;
-    }
-
-    #adminPanel > .text-right {
-        text-align: left;
-    }
-
-    #adminPanel > .text-right a {
-        padding: 15px 15px 15px 0;
-
-        color: #fff;
-        text-shadow: 0 0 1em #000;
-    }
-
-    /* Make sure that the admin modal still sits on top */
-
-    .modal, .alert {
-        z-index: 500000;
-    }
-
-    .modal-dialog {
-        margin-top: 100px;
-    }
-
-
-
-/* Header */
-
-    .parallax-wrapper {
-        overflow-y: hidden;
-    }
-
-    .parallax {
-        position: relative;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        height: 100vh;
-        min-height: 37em;
-        max-height: 100vh;
-        padding-top: 5em;
-
-        text-align: center;
-
-        background-position: center;
-        background-size: cover;
-        text-shadow: 0 0 1em #000;
-    }
-
-    .parallax .inner {
-        display: inline-block;
-
-        margin: auto;
-        padding: 5em;
-
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-    }
-    .parallax .inner h1,
-    .parallax .inner p ,
-    .parallax .inner .note-editable,
-    .parallax .inner .editText {
-        margin: 0;
-
-        color: #fff;
-    }
-
-    .parallax .inner h1 {
-        text-transform: uppercase;
-
-        font-size: 3em;
-        font-weight: 300;
-        line-height: 2;
-    }
-    .parallax .inner h1:after {
-        display: block;
-
-        width: 150px;
-        height: 2px;
-        margin: 0.2em auto 0.7em auto;
-
-        content: "";
-
-        background: #fff;
-    }
-
-
-    .parallax .inner p,
-    .parallax .inner .note-editable {
-        font-size: 1.2em;
-        line-height: 2;
-    }
-
-    .parallax .scrolly {
-        position: absolute;
-        bottom: 1em;
-        left: 50%;
-
-        display: block;
-
-        transform: translateX(-50%);
-
-        color: #fff;
-
-        font-size: 1.2em;
-
-        tetx-decoration: none;
-    }
-
-    .parallax .scrolly svg {
-        height: 1.2em;
-        margin-top: 1em;
-        filter: drop-shadow(0px 0px 5px #000);
-    }
-
-
-
-/* Content */
-
-    #content {
-        padding: 10em 0;
-    }
-
-
-
-/* Elements */
-
-    h1 {
-        color: #37474F;
-    }
-
-    h3 {
-        color: #636363;
-    }
-
-    hr {
-        width: 50px;
-        margin: 2em auto;
-
-        border: 1px solid rgba(0,0,0,0.2);
-    }
-
-
-
-/* Call to action */
-
-    .CTA {
-        padding: 5em 0;
-
-        color: #fff;
-        background: #37474F;
-    }
-
-    .CTA h3,
-    .CTA a {
-        color: #fff;
-    }
-
-    .CTA a:hover {
-        text-decoration: none;
-        border-bottom: 1px solid #fff;
-    }
-
-
-
-/* Animations */
-
-    @keyframes animatetop {
-        from {
-            top: -300px;
-            opacity: 0;
-        }
-        to {
-            top: 0;
-            opacity: 1;
-        }
-    }
+html {
+	min-height: 100%;
+	position: relative;
+	box-shadow: 0 0 100px rgba(0, 0, 0, 0.27) inset;
+}
+
+body {
+	color: #555;
+	background: #eee;
+	margin-bottom: 60px;
+	font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri Light', 'Trebuchet MS', sans-serif;
+}
+
+.whiteFont {color: #fff;}
+.padding20 {padding: 20px;}
+.padding40 {padding: 40px;}
+.blueBackground {background-color: #1ab;}
+
+.navbar-default .navbar-toggle {border-color: #888;}
+
+.navbar li {
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.navbar, .navbar-collapse {
+	border: 0;
+	background: none;
+}
+
+ul.nav.navbar-nav.navbar-right li a:hover, ul.nav.navbar-nav.navbar-right li.active a {
+	color: #1ab;
+	background: none;
+	border-bottom: 1px solid #1ab;
+}
+
+footer {
+	bottom: 0;
+	width: 100%;
+	font-size: 13px;
+	position: absolute;
+}
+:root {
+	--UIScale: 1.9;
+}
+.header {
+	height: calc(4.6rem * var(--UIScale));
+	background-color: rgba(0,0,0,0.0);
+}
+.name {
+	color: white;
+	padding: 2rem;
+	float: left;
+	font-size: calc(100% * var(--UIScale));
+}
+#menu-icon {
+	background-image: url(../images/menu-icon-outer.svg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	color: white;
+	float: right;
+	width: calc(3rem * var(--UIScale));
+	height: calc(3rem * var(--UIScale));
+	margin-top: calc(1rem * var(--UIScale));
+	margin-right: calc(1rem * var(--UIScale));
+	transition: all .2s ease-out;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+#menu-icon:hover {
+	cursor: pointer;
+	width: calc(4rem * var(--UIScale));
+	height: calc(4rem * var(--UIScale));
+	margin-top: calc(.6rem * var(--UIScale));
+	margin-right: calc(.5rem * var(--UIScale));
+}
+#menu-icon-inner {
+	margin-top: -19%;
+	margin-right: 0%;
+	width: calc(3rem * var(--UIScale));
+	height: auto;
+	vertical-align: middle;
+}
+.nav-link {
+	font-size: calc(100% * var(--UIScale));
+	padding-left: 0rem;
+	padding-right: 1rem;
+	padding-bottom: .1rem;
+	float: right;
+	border-bottom: 1px solid white;
+	color: white;
+	-webkit-transition: padding-right .051s ease-out;
+	-moz-transition: padding-right .051s ease-out;
+	-o-transition: padding-right .051s ease-out;
+	transition: padding-right .051s ease-out;
+}
+.nav {
+	padding-top: 1rem;
+	float: right;
+}
+.nav-link:hover {
+  text-decoration: none;
+	color: white;
+}
+body {
+	background: none;
+	background-color: black;
+}
+canvas {
+	position: absolute;
+	top: 0px;
+	z-index: -99999999999;
+}
+#pageContainer {
+	position: absolute;
+	z-index: -9500000;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+#centerColumn {
+	width: 60rem;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#homeContent {
+	margin-top: 9vh;
+	width: calc(100vh * 1.25);
+	height: calc(82vh);
+	color: white;
+	font-size: 350%;
+}
+
+#homeLeftSide {
+	float: left;
+	display: flex;
+	align-items: flex-end;
+	width: 50%;
+	height: 100%;
+	text-align: left;
+}
+
+#homeRightSide {
+	float: right;
+	display: flex;
+	align-items: flex-start;
+	width: 50%;
+	height: 100%;
+	text-align: right;
+}
+
+#homeUpperText {
+	padding-left: 1.5rem;
+	width: 100%;
+}
+
+#homeLowerText {
+	padding-right: 1.5rem;
+	width: 100%;
+}
+
+.subtitle {
+	font-size: 33%;
+	margin: 0;
+}
+#homeUpperText>.subtitle {
+	text-align: left;
+	transform-origin: 100% 100%;
+	transform: rotate(45deg);
+}
+#homeLowerText>.subtitle {
+	transform-origin: 0% 0%;
+	transform: rotate(45deg);
+	text-align: right;
+}
+
+@media (max-width: 60rem) {
+	#centerColumn {
+		width: 100%;
+	}
+	#homeUpperText, #homeLowerText {
+		width: 100%;
+	}
+}
+
+@media (max-width: 364px) {
+	#homeUpperText>.subtitle {
+		margin-bottom: -20%;
+		width: 120%;
+	}
+	#homeLowerText>.subtitle {
+		width: 120%;
+	}
+	
+}
